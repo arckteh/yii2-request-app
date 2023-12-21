@@ -34,3 +34,10 @@ tests/_support/_generated
 
 #vagrant folder
 /.vagrant
+
+#docker project files
+.vscode
+.fleet
+logs
+.env
+docker/log
