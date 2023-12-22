@@ -71,4 +71,6 @@ if (YII_ENV_DEV) {
     ];
 }
 
+require_once __DIR__ . '/local.php';
+
 return $config;
