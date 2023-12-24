@@ -47,7 +47,12 @@
         ],
         "post-create-project-cmd": [
             "yii\\composer\\Installer::postCreateProject",
-            "yii\\composer\\Installer::postInstall"
+            "yii\\composer\\Installer::postInstall",
+            "composer init-db"
+        ],
+        "init-db": [
+            "php yii migrate --migrationPath=@yii/rbac/migrations/ --interactive=0",
+            "php yii migrate/up --interactive=0"
         ]
     },
     "extra": {

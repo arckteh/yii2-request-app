@@ -25,6 +25,10 @@ $config = [
                 ],
             ],
         ],
+        'authManager' => [
+            'class' => 'yii\rbac\DbManager',
+            'cache' => 'cache',
+        ],
         'db' => $db,
     ],
     'params' => $params,
@@ -53,6 +57,7 @@ if (YII_ENV_DEV) {
     ];
 }
 
+require_once __DIR__ . '/common.php';
 require_once __DIR__ . '/local.php';
 
 return $config;

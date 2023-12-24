@@ -20,7 +20,8 @@ $config = [
             'class' => 'yii\caching\FileCache',
         ],
         'user' => [
-            'identityClass' => 'app\models\User',
+            'identityClass' => 'app\models\entity\User',
+            'loginUrl' => ['admin/login'],
             'enableAutoLogin' => true,
         ],
         'errorHandler' => [
@@ -41,15 +42,17 @@ $config = [
                 ],
             ],
         ],
+        'authManager' => [
+            'class' => 'yii\rbac\DbManager',
+            'cache' => 'cache',
+        ],
         'db' => $db,
-        /*
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
             ],
         ],
-        */
     ],
     'params' => $params,
 ];
@@ -71,6 +74,7 @@ if (YII_ENV_DEV) {
     ];
 }
 
+require_once __DIR__ . '/common.php';
 require_once __DIR__ . '/local.php';
 
 return $config;
