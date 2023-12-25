@@ -1,13 +1,13 @@
 <?php
 
-namespace app\models;
+namespace app\models\query;
 
 /**
- * This is the ActiveQuery class for [[Request]].
+ * This is the ActiveQuery class for [[\app\models\entity\User]].
  *
- * @see Request
+ * @see \app\models\entity\User
  */
-class RequestQuery extends \yii\db\ActiveQuery
+class UserQuery extends \yii\db\ActiveQuery
 {
     /*public function active()
     {
@@ -16,7 +16,7 @@ class RequestQuery extends \yii\db\ActiveQuery
 
     /**
      * {@inheritdoc}
-     * @return Request[]|array
+     * @return \app\models\entity\User[]|array
      */
     public function all($db = null)
     {
@@ -25,7 +25,7 @@ class RequestQuery extends \yii\db\ActiveQuery
 
     /**
      * {@inheritdoc}
-     * @return Request|array|null
+     * @return \app\models\entity\User|array|null
      */
     public function one($db = null)
     {

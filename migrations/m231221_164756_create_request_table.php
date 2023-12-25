@@ -16,7 +16,7 @@ class m231221_164756_create_request_table extends Migration
             'id' => $this->primaryKey(),
             'name' => $this->string()->notNull(),
             'email' => $this->string()->notNull(),
-            'status' => 'tinyint NOT NULL DEFAULT 0',
+            'status' => "ENUM ('Active', 'Resolved') NOT NULL DEFAULT  'Active'",
             'message' => $this->text(),
             'comment' => $this->text(),
             'created_at' => $this->timestamp()->null(),
