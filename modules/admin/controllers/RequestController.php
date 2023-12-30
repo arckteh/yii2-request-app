@@ -4,10 +4,12 @@ namespace app\modules\admin\controllers;
 
 use Yii;
 use app\models\entity\Request;
+use app\models\form\RequestForm;
 use app\modules\admin\models\search\RequestSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use app\modules\admin\models\service\RequestService;
 
 /**
  * RequestsController implements the CRUD actions for Request model.
@@ -92,14 +94,16 @@ class RequestController extends Controller
      */
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
+        $service = new RequestService();
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($service->iniByRequestId($id)) {
+            if ($this->request->isPost && $service->update($this->request->post())) {
+                return $this->redirect(['view', 'id' => $service->getRequestId()]);
+            }
         }
 
         return $this->render('update', [
-            'model' => $model,
+            'model' => $service->getReequest(),
         ]);
     }
 

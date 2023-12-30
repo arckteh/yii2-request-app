@@ -97,7 +97,7 @@ if (YII_ENV_DEV) {
     ];
 }
 
-require_once __DIR__ . '/common.php';
-require_once __DIR__ . '/local.php';
+require __DIR__ . '/common.php';
+require __DIR__ . '/local.php';
 
 return $config;

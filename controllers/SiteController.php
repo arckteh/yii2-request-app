@@ -6,7 +6,7 @@ use Yii;
 use yii\helpers\Url;
 use yii\web\Controller;
 use yii\web\Response;
-use app\models\ContactForm;
+use app\models\form\ContactForm;
 
 /**
  * @SWG\Swagger(
@@ -26,7 +26,7 @@ class SiteController extends Controller
         return [
             'docs' => [
                 'class' => 'yii2mod\swagger\SwaggerUIRenderer',
-                'restUrl' => Url::to(['site/json-schema']),
+                'restUrl' => Url::to(['/site/json-schema']),
             ],
             'json-schema' => [
                 'class' => 'yii2mod\swagger\OpenAPIRenderer',
