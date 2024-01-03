@@ -27,6 +27,7 @@ class m231222_214529_create_admin_user extends Migration
         $user->setPassword('admin_pwd');
         $user->role_name = User::ROLE_ADMIN;
         $user->status = User::STATUS_ACTIVE;
+        $user->access_token = 'token_admin';
         $user->save(false);
 
         $auth = Yii::$app->authManager;

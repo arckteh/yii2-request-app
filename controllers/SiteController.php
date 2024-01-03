@@ -18,23 +18,17 @@ use app\models\form\ContactForm;
  */
 class SiteController extends Controller
 {
+    const API_PATH ='/../config/api/swagger.json';
     /**
      * @inheritdoc
      */
     public function actions()
     {
+
         return [
             'docs' => [
                 'class' => 'yii2mod\swagger\SwaggerUIRenderer',
                 'restUrl' => Url::to(['/site/json-schema']),
-            ],
-            'json-schema' => [
-                'class' => 'yii2mod\swagger\OpenAPIRenderer',
-                // Тhe list of directories that contains the swagger annotations.
-                'scanDir' => [
-                    Yii::getAlias('@app/controllers'),
-                    Yii::getAlias('@app/models'),
-                ],
             ],
             'error' => [
                 'class' => 'yii\web\ErrorAction',
@@ -44,6 +38,13 @@ class SiteController extends Controller
                 'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
             ],
         ];
+    }
+
+    public function actionJsonSchema()
+    {
+        $data = file_get_contents(__DIR__ . self::API_PATH);
+        $json = json_decode($data, true);
+        $this->asJson($json);
     }
 
     /**

@@ -6,6 +6,10 @@ use Yii;
 use yii\rest\ActiveController;
 use yii\filters\auth\HttpBearerAuth;
 use yii\web\ForbiddenHttpException;
+use yii\filters\auth\CompositeAuth;
+use yii\filters\auth\HttpBasicAuth;
+use yii\filters\auth\QueryParamAuth;
+
 
 /**
  * RequestController implements the CRUD actions for Request model.
@@ -14,18 +18,19 @@ class RequestController extends ActiveController
 {
     public $modelClass = 'app\models\entity\Request';
 
-
     public function behaviors()
     {
         $behaviors = parent::behaviors();
-        return $behaviors;
-
         $behaviors['authenticator'] = [
-            'class' => HttpBearerAuth::class,
+            'class' => CompositeAuth::class,
+            'authMethods' => [
+                HttpBasicAuth::class,
+                HttpBearerAuth::class,
+                QueryParamAuth::class,
+            ],
         ];
         return $behaviors;
     }
-
     /**
      * {@inheritdoc}
      */
