@@ -1,6 +1,6 @@
 <?php
 
-namespace app\modules\admin\models\search;
+namespace app\models\search;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
@@ -11,6 +11,9 @@ use app\models\entity\Request;
  */
 class RequestSearch extends Request
 {
+    public $status;
+    public $id;
+
     /**
      * {@inheritdoc}
      */
@@ -52,8 +55,6 @@ class RequestSearch extends Request
         $this->load($params);
 
         if (!$this->validate()) {
-            // uncomment the following line if you do not want to return any records when validation fails
-            // $query->where('0=1');
             return $dataProvider;
         }
 
@@ -70,6 +71,7 @@ class RequestSearch extends Request
             ->andFilterWhere(['like', 'message', $this->message])
             ->andFilterWhere(['like', 'comment', $this->comment]);
 
+//echo $query->createCommand()->getRawSql(); die('test');
         return $dataProvider;
     }
 }

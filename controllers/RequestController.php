@@ -7,9 +7,7 @@ use yii\rest\ActiveController;
 use yii\filters\auth\HttpBearerAuth;
 use yii\web\ForbiddenHttpException;
 use yii\filters\auth\CompositeAuth;
-use yii\filters\auth\HttpBasicAuth;
-use yii\filters\auth\QueryParamAuth;
-
+use app\models\search\RequestSearch;
 
 /**
  * RequestController implements the CRUD actions for Request model.
@@ -24,9 +22,7 @@ class RequestController extends ActiveController
         $behaviors['authenticator'] = [
             'class' => CompositeAuth::class,
             'authMethods' => [
-                HttpBasicAuth::class,
-                HttpBearerAuth::class,
-                QueryParamAuth::class,
+                HttpBearerAuth::class
             ],
         ];
         return $behaviors;
@@ -40,11 +36,28 @@ class RequestController extends ActiveController
 
         $actions['create'] = [
             'class' => 'yii\rest\CreateAction',
-            'modelClass' => 'app\models\form\RequestForm',
+            'modelClass' => 'app\models\entity\Request',
             'checkAccess' => false,
             'scenario' => $this->createScenario,
         ];
+
+        $actions['index']['prepareDataProvider'] = [$this, 'prepareDataProvider'];
         return $actions;
+
+        $actions['index']['dataFilter'] = [
+            'class' => \yii\data\ActiveDataFilter::class,
+            'searchModel' => 'app\models\search\RequestSearch'
+        ];
+
+        return $actions;
+    }
+
+    public function prepareDataProvider() {
+        $searchModel = new RequestSearch();
+        $params[$searchModel->formName()] = Yii::$app->getRequest()->getQueryParams();
+        $dataProvider = $searchModel->search($params);
+
+        return $dataProvider;
     }
 
 

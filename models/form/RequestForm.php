@@ -29,7 +29,7 @@ class RequestForm extends Model
             [['email'], 'string', 'max' => 256],
             ['email', 'email'],
             // verifyCode needs to be entered correctly
-            //['verifyCode', 'captcha'],
+            ['verifyCode', 'captcha', 'on' => 'web'],
         ];
     }
     public function attributeLabels()
@@ -52,8 +52,7 @@ class RequestForm extends Model
 
             try {
                 $model = new Request();
-                $model->load( $this->getAttributes());
-
+                $model->load( $this->getAttributes(), '');
                 if (!$model->save()) {
                     throw new Exception(Yii::t('app', 'Model not saved'));
                 }

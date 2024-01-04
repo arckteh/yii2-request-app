@@ -34,6 +34,8 @@ class PostRequestController extends Controller
         $model = new RequestForm();
 
         if ($this->request->isPost) {
+            $model->scenario = 'web';
+
             if ($model->load($this->request->post()) && $model->save()) {
                 Yii::$app->session->setFlash('requestFormSubmitted');
 

@@ -1,5 +1,5 @@
 <?php
-namespace app\modules\admin\models\service;
+namespace app\models\service;
 
 use Yii;
 use yii\base\Model;

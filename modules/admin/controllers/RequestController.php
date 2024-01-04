@@ -5,11 +5,11 @@ namespace app\modules\admin\controllers;
 use Yii;
 use app\models\entity\Request;
 use app\models\form\RequestForm;
-use app\modules\admin\models\search\RequestSearch;
+use app\models\search\RequestSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use app\modules\admin\models\service\RequestService;
+use app\models\service\RequestService;
 
 /**
  * RequestsController implements the CRUD actions for Request model.

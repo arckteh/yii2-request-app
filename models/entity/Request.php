@@ -60,6 +60,7 @@ class Request extends \yii\db\ActiveRecord
             [['message', 'comment'], 'string'],
             [['created_at', 'updated_at'], 'safe'],
             [['name', 'email'], 'string', 'max' => 255],
+            ['email', 'email'],
             ['comment',
                 'required',
                 'when' => function($model) {
