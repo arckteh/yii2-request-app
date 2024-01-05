@@ -1,6 +1,6 @@
 {
     "name": "arckteh/yii2-request-app",
-    "description": "Yii 2 Basic Project Template",
+    "description": "Requests management app based on Yii 2 Basic Project Template",
     "keywords": ["yii2", "framework", "basic", "project template"],
     "homepage": "https://github.com/arckteh/yii2-request-app",
     "type": "project",
@@ -45,13 +45,12 @@
         ],
         "post-create-project-cmd": [
             "yii\\composer\\Installer::postCreateProject",
-            "yii\\composer\\Installer::postInstall",
-            "composer init-db",
-            "composer init-test-db"
-        ],
+            "yii\\composer\\Installer::postInstall"
+         ],
         "init-db": [
             "php yii migrate --migrationPath=@yii/rbac/migrations/ --interactive=0",
-            "php yii migrate/up --interactive=0"
+            "php yii migrate/up --interactive=0",
+            "composer init-test-db"
         ],
         "init-test-db": [
             "php tests/bin/yii migrate --migrationPath=@yii/rbac/migrations/ --interactive=0",

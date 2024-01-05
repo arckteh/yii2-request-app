@@ -5,7 +5,7 @@ volumes:
     driver: local
 
 networks:
-  div_tz_yii:
+  yii2_reqyests_app:
 
 services:
   php:
@@ -21,7 +21,7 @@ services:
     stdin_open: true
     tty: true
     networks:
-      - div_tz_yii
+      - yii2_reqyests_app
     restart: unless-stopped
   web_server:
     build: ./docker/nginx
@@ -36,7 +36,7 @@ services:
     links:
       - php
     networks:
-      - div_tz_yii
+      - yii2_reqyests_app
     environment:
       - TZ=Europe/Moscow
     stdin_open: true
@@ -59,7 +59,7 @@ services:
       TZ: Europe/Moscow
     command: mysqld --user=root --sql-mode=""
     networks:
-      - div_tz_yii
+      - yii2_reqyests_app
     stdin_open: true
     tty: true
     restart: unless-stopped
@@ -71,7 +71,7 @@ services:
     ports:
       - '${INTERFACE}:11211:11211'
     networks:
-      - div_tz_yii
+      - yii2_reqyests_app
     environment:
       - TZ=Europe/Moscow
     stdin_open: true
@@ -91,7 +91,7 @@ services:
     stdin_open: true
     tty: true
     networks:
-      - div_tz_yii
+      - yii2_reqyests_app
   source:
     image: alpine:latest
     container_name: source
@@ -105,4 +105,4 @@ services:
       - ./:/var/www/
       - /etc/localtime:/etc/localtime/:ro
     networks:
-      - div_tz_yii
+      - yii2_reqyests_app
