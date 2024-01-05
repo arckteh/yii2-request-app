@@ -22,6 +22,7 @@ class m231221_164756_create_request_table extends Migration
             'created_at' => $this->timestamp()->null(),
             'updated_at' => $this->timestamp()->null(),
         ]);
+        $this->createIndex('status', '{{%request}}', 'status');
     }
 
     /**

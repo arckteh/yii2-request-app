@@ -223,7 +223,7 @@
         "tags": [
           "request"
         ],
-        "summary": "Finds Requets by status",
+        "summary": "Finds Requets by status and date",
         "description": "Requests status values can be provided with comma separated strings",
         "operationId": "findPetsByStatus",
         "parameters": [
@@ -232,7 +232,7 @@
             "in": "query",
             "description": "Status values that need to be considered for filter",
             "required": false,
-            "explode": true,
+            "explode": false,
             "schema": {
               "type": "string",
               "default": "Active",
@@ -240,6 +240,18 @@
                 "Active",
                 "Resolved"
               ]
+            }
+          },
+          {
+            "name": "created_at",
+            "in": "query",
+            "description": "Request date to be considered for filter",
+            "required": false,
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "format": "date",
+              "default": "2024-01-23"
             }
           }
         ],
@@ -338,7 +350,7 @@
           },
           "message": {
             "type": "string",
-            "eample": "Test user message"
+            "example": "Test user message"
           }
         },
         "required": [
@@ -372,12 +384,12 @@
           },
           "message": {
             "type": "string",
-            "eample": "Test user message"
+            "example": "Test user message"
 
           },
           "comment": {
             "type": "string",
-            "eample": "Test manager comment"
+            "example": "Test manager comment"
           }
         },
         "required": [

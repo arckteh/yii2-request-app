@@ -2,6 +2,7 @@
 
 namespace app\models\search;
 
+use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use app\models\entity\Request;
@@ -12,6 +13,7 @@ use app\models\entity\Request;
 class RequestSearch extends Request
 {
     public $status;
+    public $created_at;
     public $id;
 
     /**
@@ -23,6 +25,7 @@ class RequestSearch extends Request
             [['id',], 'integer'],
             ['status', 'in', 'range' => array_keys(self::getAllowedStatuses())],
             [['name', 'email', 'message', 'comment', 'created_at', 'updated_at'], 'safe'],
+            [['created_at', 'updated_at'], 'date', 'format' =>  'yyyy-M-d', 'message' => Yii::t('app', 'Please enter value in yyyy-M-d format')],
         ];
     }
 
@@ -62,16 +65,33 @@ class RequestSearch extends Request
         $query->andFilterWhere([
             'id' => $this->id,
             'status' => $this->status,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name])
             ->andFilterWhere(['like', 'email', $this->email])
             ->andFilterWhere(['like', 'message', $this->message])
             ->andFilterWhere(['like', 'comment', $this->comment]);
+        if ($this->created_at) {
+            $query->andFilterWhere(
+                [
+                    '=',
+                    new \yii\db\Expression('DATE_FORMAT(created_at, "%d.%m.%Y")'),
+                    date('d.m.Y', strtotime($this->created_at)),
+                ]
+            );
+        }
+        if ($this->updated_at) {
+            $query->andFilterWhere(
+                [
+                    '=',
+                    new \yii\db\Expression('DATE_FORMAT(update_at, "%d.%m.%Y")'),
+                    date('d.m.Y', strtotime($this->updated_at)),
+                ]
+            );
+
+        }
 
 //echo $query->createCommand()->getRawSql(); die('test');
-        return $dataProvider;
+            return $dataProvider;
+        }
     }
-}

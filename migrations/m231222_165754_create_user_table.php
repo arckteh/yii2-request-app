@@ -26,6 +26,7 @@ class m231222_165754_create_user_table extends Migration
             'role_name' => $this->string(64)->notNull()->defaultValue(''),
             'status' => 'tinyint NOT NULL DEFAULT 0',
         ]);
+        $this->createIndex('username', '{{%username}}', 'username');
     }
 
     /**

@@ -39,6 +39,11 @@ $this->params['breadcrumbs'][] = $this->title;
                 'format' => 'html',
                 'filter' => Request::getAllowedStatuses(),
             ],
+            [
+                'attribute'=>'created_at',
+                'format' => ['datetime', 'php:Y-m-d H:i:s'],
+                'label' => Yii::t('app', 'Created At'),
+            ],
 
             'message:ntext',
             //'comment:ntext',
@@ -48,7 +53,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'class' => ActionColumn::className(),
                 'urlCreator' => function ($action, Request $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'id' => $model->id]);
-                 }
+                }
             ],
         ],
     ]); ?>

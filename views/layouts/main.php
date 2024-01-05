@@ -43,6 +43,8 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
             ['label' => 'About', 'url' => ['/site/about']],
             ['label' => 'Contact', 'url' => ['/site/contact']],
             ['label' => 'Request', 'url' => ['/post-request']],
+            ['label' => 'Admin area', 'url' => ['/admin']],
+            ['label' => 'API Docs', 'url' => ['/site/docs']],
         ]
     ]);
     NavBar::end();

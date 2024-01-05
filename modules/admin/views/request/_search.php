@@ -2,9 +2,10 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use yii\jui\DatePicker;
 
 /** @var yii\web\View $this */
-/** @var app\modules\admin\models\search\RequestSearch $model */
+/** @var app\models\search\RequestSearch $model */
 /** @var yii\widgets\ActiveForm $form */
 ?>
 
@@ -30,7 +31,10 @@ use yii\widgets\ActiveForm;
 
     <?php // echo $form->field($model, 'comment') ?>
 
-    <?php // echo $form->field($model, 'created_at') ?>
+    <?= $form->field($model, 'created_at')->widget(DatePicker::class, [
+        'language' => 'ru',
+        'dateFormat' => 'yyyy-MM-dd',
+    ]); ?>
 
     <?php // echo $form->field($model, 'updated_at') ?>
 
